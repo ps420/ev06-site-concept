@@ -1,12 +1,13 @@
 const SITE_CONFIG = {
-  brandName: 'EV06',
+  brandName: 'Tracklab EV06',
   productLabel: '4G Safety Watch',
   contactEmail: 'sales@example.com',
-  demoSubject: 'EV06 Website / Device Enquiry',
+  demoSubject: 'Tracklab EV06 Enquiry',
 };
 
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.site-nav');
+const navLinks = document.querySelectorAll('.site-nav a');
 const revealItems = document.querySelectorAll('.reveal');
 const leadForm = document.querySelector('#leadForm');
 const mailtoLink = document.querySelector('#mailtoLink');
@@ -26,6 +27,17 @@ if (navToggle && nav) {
   });
 }
 
+function setActiveNav() {
+  if (!navLinks.length) return;
+  const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  navLinks.forEach((link) => {
+    const href = (link.getAttribute('href') || '').toLowerCase();
+    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+}
+
 if (revealItems.length) {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -36,7 +48,7 @@ if (revealItems.length) {
         }
       });
     },
-    { threshold: 0.14 }
+    { threshold: 0.12 }
   );
 
   revealItems.forEach((item) => observer.observe(item));
@@ -112,3 +124,5 @@ if (leadForm) {
     updateMailtoLink();
   });
 }
+
+setActiveNav();
