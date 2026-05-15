@@ -1,10 +1,12 @@
 :root {
   --primary: #00378d;
-  --primary-dark: #072a63;
-  --primary-soft: #eef4ff;
-  --accent: #1d6bff;
+  --primary-dark: #002b70;
+  --primary-deep: #001f52;
+  --primary-soft: #edf3ff;
+  --accent: #00378d;
+  --accent-soft: #dce9ff;
   --bg: #ffffff;
-  --bg-alt: #f7f9fc;
+  --bg-alt: #f5f8fc;
   --panel: #ffffff;
   --panel-soft: #f4f7fb;
   --text: #17305d;
@@ -24,7 +26,7 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 28%, #f7f9fc 100%);
+  background: linear-gradient(180deg, #f7faff 0%, #ffffff 30%, #f5f8fc 100%);
   overflow-x: hidden;
 }
 
@@ -114,7 +116,7 @@ button { cursor: pointer; }
   position: relative;
   z-index: 1;
   background:
-    linear-gradient(135deg, rgba(0,55,141,0.92), rgba(7,42,99,0.94)),
+    linear-gradient(135deg, rgba(0,55,141,0.97), rgba(0,43,112,0.96)),
     radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1), transparent 30%);
   color: #fff;
 }
@@ -206,6 +208,9 @@ button { cursor: pointer; }
   background: rgba(255,255,255,0.12);
   color: #fff;
   border-color: rgba(255,255,255,0.24);
+}
+.btn-gold:hover {
+  background: var(--primary-dark);
 }
 .btn-block { width: 100%; }
 
@@ -352,6 +357,20 @@ button { cursor: pointer; }
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+.site-nav a.active,
+.site-nav a:focus-visible,
+.eyebrow,
+.spec-card strong,
+.feature-card h3,
+.use-card h3,
+.timeline-step h3,
+.faq-item summary,
+.contact-copy h2,
+.section-head h2,
+.section-copy h2,
+.content-panel h2 {
+  color: var(--primary-dark);
+}
 .feature-card h3,
 .use-card h3,
 .timeline-step h3,
@@ -474,6 +493,9 @@ button { cursor: pointer; }
   color: #fff;
   font-weight: 700;
   box-shadow: 0 16px 30px rgba(0,55,141,0.22);
+}
+.floating-cta:hover {
+  background: var(--primary-dark);
 }
 
 .reveal {
