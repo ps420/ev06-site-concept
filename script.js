@@ -12,6 +12,11 @@ const revealItems = document.querySelectorAll('.reveal');
 const leadForm = document.querySelector('#leadForm');
 const mailtoLink = document.querySelector('#mailtoLink');
 const formStatus = document.querySelector('#formStatus');
+const header = document.querySelector('.site-header');
+const heroStage = document.querySelector('.device-stage');
+const progressBar = document.createElement('div');
+progressBar.className = 'page-progress';
+document.body.appendChild(progressBar);
 
 if (navToggle && nav) {
   navToggle.addEventListener('click', () => {
@@ -126,3 +131,47 @@ if (leadForm) {
 }
 
 setActiveNav();
+
+function updateScrollChrome() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+  progressBar.style.width = `${progress}%`;
+  if (header) header.classList.toggle('is-scrolled', scrollTop > 8);
+}
+
+function attachCardGlow() {
+  const cards = document.querySelectorAll('.feature-card, .use-card, .timeline-step, .detail-card, .content-panel, .image-panel, .stat-band div');
+  cards.forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      card.style.backgroundImage = `radial-gradient(circle at ${x}% ${y}%, rgba(0,55,141,0.06), rgba(255,255,255,0) 38%), linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,253,0.96))`;
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.backgroundImage = '';
+    });
+  });
+}
+
+function attachHeroParallax() {
+  if (!heroStage) return;
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  hero.addEventListener('pointermove', (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 10;
+    heroStage.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  });
+  hero.addEventListener('pointerleave', () => {
+    heroStage.style.transform = 'translate3d(0,0,0)';
+  });
+}
+
+window.addEventListener('scroll', updateScrollChrome, { passive: true });
+window.addEventListener('load', updateScrollChrome);
+updateScrollChrome();
+attachCardGlow();
+attachHeroParallax();
