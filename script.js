@@ -2,7 +2,7 @@ const SITE_CONFIG = {
   brandName: 'Tracklab EV06',
   productLabel: '4G Safety Watch',
   contactEmail: 'sales@example.com',
-  demoSubject: 'Tracklab EV06 Enquiry',
+  demoSubject: 'Tracklab EV06 Book Demo Request',
 };
 
 const navToggle = document.querySelector('.nav-toggle');
